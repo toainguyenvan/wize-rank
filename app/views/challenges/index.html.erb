@@ -1,0 +1,39 @@
+<div class="page-header">
+  <%= link_to new_challenge_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Challenge
+  <% end %>
+  <h1>Listing challenges</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Raw content</th>
+            <th>Language</th>
+            <th>Point</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @challenges.each do |challenge| %>
+      <tr>
+          <td><%= challenge.name %></td>
+          <td><%= challenge.description %></td>
+          <td><%= challenge.raw_content %></td>
+          <td><%= challenge.language %></td>
+          <td><%= challenge.point %></td>
+          <td><%= link_to 'Show', challenge %></td>
+        <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
+        <td><%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

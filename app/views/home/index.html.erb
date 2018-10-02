@@ -1,0 +1,32 @@
+<h2>Welcome to Index</h2>
+<%# <style type="text/css" media="screen">
+    #editor { 
+        position: relative;
+        width: 50%;
+        height: 400px;
+    }
+</style>
+
+    <div id="editor">def foo
+    x = "All this is syntax highlighted"
+    puts x
+end
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/ruby");
+</script> %>
+<script>
+    SEC_HTTPS = true;
+    SEC_BASE = "compilers.widgets.sphere-engine.com"; 
+    (function(d, s, id){ SEC = window.SEC || (window.SEC = []);
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; 
+    js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);   
+    }(document, "script", "sphere-engine-compilers-jssdk"));
+</script>
+<div class="sec-widget" data-widget="e7700c6220e6c62ada718f708c1f5d63"></div>
