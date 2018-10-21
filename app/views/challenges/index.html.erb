@@ -25,7 +25,7 @@
       <% @challenges.each do |challenge| %>
       <tr>
           <td><%= challenge.name %></td>
-          <td><%= challenge.description %></td>
+          <td><%= challenge.description.slice(0, 20).concat('...') || '...' %></td>
           <td><%= challenge.raw_content %></td>
           <td><%= challenge.language %></td>
           <td><%= challenge.point %></td>

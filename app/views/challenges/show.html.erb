@@ -1,3 +1,4 @@
+<%= tinymce %>
 <div class="page-header">
   <%= link_to challenges_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
@@ -15,10 +16,14 @@
   <dd><%= @challenge.name %></dd>
 
   <dt>Description:</dt>
-  <dd><%= @challenge.description %></dd>
+  <dd><%= raw @challenge.description %></dd>
 
-  <dt>Raw content:</dt>
-  <dd><%= @challenge.raw_content %></dd>
+  <dt>Solutions:</dt>
+  <dd>
+    <% @challenge.solutions.each do |solution| %>
+      <%= solution.content %>
+    <% end %>
+  </dd>
 
   <dt>Language:</dt>
   <dd><%= @challenge.language %></dd>

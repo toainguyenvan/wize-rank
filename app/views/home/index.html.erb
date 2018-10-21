@@ -1,32 +1,40 @@
-<h2>Welcome to Index</h2>
-<%# <style type="text/css" media="screen">
+<h2>Welcome to WizeRank</h2>
+<style type="text/css" media="screen">
     #editor { 
         position: relative;
         width: 50%;
         height: 400px;
     }
+    .output{
+	font-family: monospace;
+	white-space: pre-line;
+	border:1px solid #ccc;
+	background: #eee;
+	min-height: 50px;
+}
 </style>
 
-    <div id="editor">def foo
+<input class="btn btn-primary" id='run' type="button" onClick="run()" value="RUN"/>
+
+<div id="editor">def foo
     x = "All this is syntax highlighted"
     puts x
 end
-    </div>
-
+</div>
+<p id="testsoutput" class="output">Output of all tests appear here<br><br>
+</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/ruby");
-</script> %>
-<script>
-    SEC_HTTPS = true;
-    SEC_BASE = "compilers.widgets.sphere-engine.com"; 
-    (function(d, s, id){ SEC = window.SEC || (window.SEC = []);
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; 
-    js.src = (SEC_HTTPS ? "https" : "http") + "://" + SEC_BASE + "/static/sdk/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);   
-    }(document, "script", "sphere-engine-compilers-jssdk"));
+
+    function run(){
+        res = {data: editor.getValue(), lang: "Ruby"};
+        $.post('/home/run/', res ,function(data){
+            console.log(data);
+            console.log(data.stderr);
+            $('#testsoutput').append("<b>"+ data.stdout + "</b>" + "</br>" + data.stderr + "</br>");
+        })
+    }
 </script>
-<div class="sec-widget" data-widget="e7700c6220e6c62ada718f708c1f5d63"></div>

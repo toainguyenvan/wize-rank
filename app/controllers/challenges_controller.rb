@@ -15,6 +15,7 @@ class ChallengesController < ApplicationController
   # GET /challenges/new
   def new
     @challenge = Challenge.new
+    @challenge.solutions.new
   end
 
   # GET /challenges/1/edit
@@ -69,6 +70,6 @@ class ChallengesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def challenge_params
-      params.require(:challenge).permit(:name, :description, :raw_content, :language, :point)
+      params.require(:challenge).permit(:name, :description, :raw_content, :language, :point, solutions_attributes: [:content, :lang])
     end
 end
