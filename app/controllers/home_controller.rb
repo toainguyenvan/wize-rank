@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     before_action :authenticate_user!
 
     def index
+        @lang = get_lang_list
     end
 
     def switch_lang
@@ -17,7 +18,7 @@ class HomeController < ApplicationController
     def run
         params = get_params
         lang = get_lang_header(params[:lang_id])
-        uri = URI.parse('https://run.glot.io/languages/' + lang[:name] + '/latest')
+        uri = URI.parse('https://run.glot.io/languages/' + lang[:name].downcase + '/latest')
         header = { 
             'Authorization' => 'Token 323662bd-7641-468a-9b1f-541a8d1693d7',
             'Content-type' => 'application/json' 
@@ -37,7 +38,7 @@ class HomeController < ApplicationController
         request.body = payload.to_json
 
         # Send the request
-        response = https.request(request)
+        p response = https.request(request)
         render json: response.body
     end
 

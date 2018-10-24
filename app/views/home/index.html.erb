@@ -17,17 +17,13 @@
 <input class="btn btn-primary" id='run' type="button" onClick="run()" value="RUN"/>
 Choose language:
 <select id="lang-select">
-    <option value="1">Java</option>
-    <option value="2">Ruby</option>
+    <% @lang.each do |lang|%>
+        <option value="<%= lang[:id]%>"><%= lang[:name]%></option>
+    <% end %>
 </select>
-
-<div id="editor">import java.io.*;
-
-class Main {
-  public static void main (String[] args) {
-    System.out.println("Hello Java");
-  }
-}
+<div id="editor">def do_something
+    puts 'Hello World!'
+end
 </div>
 <p id="testsoutput" class="output">Output of all tests appear here<br><br>
 </p>
@@ -35,11 +31,13 @@ class Main {
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/java");
+    editor.session.setMode("ace/mode/ruby");
 
     function run(){
         lang_id = $('#lang-select').val();
         res = { data: editor.getValue(), lang_id: lang_id};
+        console.log(res);
+        
         $.post('/home/run/', res ,function(data){
             console.log(data);
             console.log(data.stderr);
@@ -50,7 +48,8 @@ class Main {
         $('#lang-select').on('change', function(){
             //Switch lang
             $.get('/home/switch_lang/' + this.value, function(data){
-                editor.session.setMode("ace/mode/" + data.name);
+                console.log(data);
+                editor.session.setMode("ace/mode/" + data.name.toLowerCase());
                 editor.setValue(data.header, -1);
             })
         })
