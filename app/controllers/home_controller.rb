@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     def run
         params = get_params
         lang = get_lang_header(params[:lang_id])
-        uri = URI.parse('https://run.glot.io/languages/java/latest')
+        uri = URI.parse('https://run.glot.io/languages/' + lang[:name] + '/latest')
         header = { 
             'Authorization' => 'Token 323662bd-7641-468a-9b1f-541a8d1693d7',
             'Content-type' => 'application/json' 
@@ -25,7 +25,7 @@ class HomeController < ApplicationController
 
         payload = {
             files: [{
-                name: 'Main.java',
+                name: lang[:file_name],
                 content: get_params[:data]
             }]
         }

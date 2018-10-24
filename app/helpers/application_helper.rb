@@ -2,15 +2,17 @@ module ApplicationHelper
     LANG = [
         {
             id: '1',
-            name: 'java', 
+            name: 'java',
+            file_name: 'Main.java',
             header:
-                "import java.io.*;\nclass Main {\n\tpublic static void main (String[] args) {\n\t\tSystem.out.println('Hello Java');\n\t}\n}"
+                "import java.io.*;\n\nclass Main {\n\tpublic static void main (String[] args) {\n\t\tSystem.out.println(\"Hello Java\");\n\t}\n}"
         },
         {
             id: '2',
             name: 'ruby',
+            file_name: 'main.rb',
             header:
-                "def do_something\n\tputs 'Hello World!'\nend"
+                "def do_something\n\tputs 'Hello World!'\nend\ndo_something"
         }
     ]
     

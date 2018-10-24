@@ -38,7 +38,8 @@ class Main {
     editor.session.setMode("ace/mode/java");
 
     function run(){
-        res = { data: editor.getValue(), lang_id: "1"};
+        lang_id = $('#lang-select').val();
+        res = { data: editor.getValue(), lang_id: lang_id};
         $.post('/home/run/', res ,function(data){
             console.log(data);
             console.log(data.stderr);
