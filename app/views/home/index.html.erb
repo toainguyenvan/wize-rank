@@ -15,6 +15,11 @@
 </style>
 
 <input class="btn btn-primary" id='run' type="button" onClick="run()" value="RUN"/>
+Choose language:
+<select id="lang-select">
+    <option value="1">Java</option>
+    <option value="2">Ruby</option>
+</select>
 
 <div id="editor">import java.io.*;
 
@@ -30,14 +35,23 @@ class Main {
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/ruby");
+    editor.session.setMode("ace/mode/java");
 
     function run(){
-        res = {data: editor.getValue(), lang: "Ruby"};
+        res = { data: editor.getValue(), lang_id: "1"};
         $.post('/home/run/', res ,function(data){
             console.log(data);
             console.log(data.stderr);
             $('#testsoutput').append("<b>"+ data.stdout + "</b>" + "</br>" + data.stderr + "</br>");
         })
     }
+    $(document).ready(function(){
+        $('#lang-select').on('change', function(){
+            //Switch lang
+            $.get('/home/switch_lang/' + this.value, function(data){
+                editor.session.setMode("ace/mode/" + data.name);
+                editor.setValue(data.header, -1);
+            })
+        })
+    });
 </script>

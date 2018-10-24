@@ -9,8 +9,14 @@ class HomeController < ApplicationController
     def index
     end
 
+    def switch_lang
+        lang = get_lang_header(params[:id])
+        render json: lang.to_json
+    end
+
     def run
-        get_params
+        params = get_params
+        lang = get_lang_header(params[:lang_id])
         uri = URI.parse('https://run.glot.io/languages/java/latest')
         header = { 
             'Authorization' => 'Token 323662bd-7641-468a-9b1f-541a8d1693d7',
@@ -36,6 +42,6 @@ class HomeController < ApplicationController
     end
 
     def get_params
-        params.permit(:data, :lang)
+        params.permit(:data, :lang_id)
     end
 end

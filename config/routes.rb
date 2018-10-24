@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   post '/home/:run', to: 'home#run'
+  get '/home/:switch_lang/:id', to: 'home#switch_lang'
 end
